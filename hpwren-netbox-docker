@@ -1,0 +1,10 @@
+# HPWREN-enhanced build of netboxcommunity/netbox container
+# See: https://github.com/netbox-community/netbox-docker/wiki/Build#enhance-the-image
+# See: https://github.com/netbox-community/netbox-docker/wiki/Using-Netbox-Plugins
+#
+# Adds the following plugins:
+#  * ntc-netbox-plugin-onboarding
+
+FROM netboxcommunity/netbox:latest
+
+RUN pip install --no-warn-script-location ntc-netbox-plugin-onboarding

@@ -1,0 +1,4 @@
+FROM netboxcommunity/netbox:latest-ldap
+
+COPY ./plugin_requirements.txt /
+RUN pip install --no-warn-script-location -r /plugin_requirements.txt
