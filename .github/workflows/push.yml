@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    continue-on-error: ${{ matrix.docker_from == 'alpine:edge' }}
     strategy:
       matrix:
         build_cmd:
@@ -19,14 +20,14 @@ jobs:
         - ./build.sh develop
         docker_from:
         - '' # use the default of the build script
-        # - python:3.10-rc-alpine # disable until dependencies work
+        - alpine:edge
       fail-fast: false
     runs-on: ubuntu-latest
     name: Builds new Netbox Docker Images
     steps:
     - id: git-checkout
       name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - id: docker-build
       name: Build the image from '${{ matrix.docker_from }}' with '${{ matrix.build_cmd }}'
       run: ${{ matrix.build_cmd }}
