@@ -23,3 +23,5 @@ WORKDIR /opt
 COPY --from=builder /opt/netbox/venv /opt/netbox/venv
 
 COPY configuration/onboarding.py /opt/netbox/netbox/netbox/onboarding.py
+
+WORKDIR /opt/netbox/netbox
