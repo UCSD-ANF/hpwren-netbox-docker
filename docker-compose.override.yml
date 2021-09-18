@@ -1,11 +1,20 @@
 version: '3.4'
 services:
   netbox:
-    ports:
-      - 8000:8080
     build:
       context: .
       dockerfile: Dockerfile-Plugins
     image: netbox:latest-plugins
   netbox-worker:
     image: netbox:latest-plugins
+  tls:
+    image: zazukoians/hitch
+    environment:
+      HITCH_PEM: /app/cert_and_key.pem # path within the container to the TLS certificate
+      HITCH_PARAMS: --backend=[netbox]:8080 --frontend=[*]:443 # listen on *:443 and forward traffic to netbox
+    depends_on:
+      - netbox
+    volumes:
+      - /etc/netbox/tls/combined_netbox.int.hpwren.ucsd.edu.pem:/app/cert_and_key.pem # mount the TLS certificate
+    ports:
+      - 443:443 # bind the container's port 443 to the hos's port 8443
