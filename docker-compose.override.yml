@@ -7,8 +7,12 @@ services:
       context: .
       dockerfile: Dockerfile-Plugins
     image: netbox:latest-plugins
+    env_file: &netbox_env env/netbox.local.env
   netbox-worker:
     image: netbox:latest-plugins
+    env_file: *netbox_env
+  netbox-housekeeping:
+    env_file: *netbox_env
   tls:
     image: zazukoians/hitch
     environment:
