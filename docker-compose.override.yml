@@ -6,13 +6,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Plugins
-    image: netbox:latest-plugins
-    env_file: &netbox_env env/netbox.local.env
+    image: &image netbox:${VERSION-latest}-plugins
+    env_file: &env env/netbox-local.env
   netbox-worker:
-    image: netbox:latest-plugins
-    env_file: *netbox_env
+    image: *image
+    env_file: *env
   netbox-housekeeping:
-    env_file: *netbox_env
+    image: *image
+    env_file: *env
   tls:
     image: zazukoians/hitch
     environment:

@@ -1,4 +1,6 @@
-FROM netboxcommunity/netbox:latest-ldap AS builder
+ARG VERSION=latest
+FROM netboxcommunity/netbox:${VERSION}-ldap
+ARG VERSION
 
 RUN apk add --no-cache \
       build-base \
@@ -6,22 +8,15 @@ RUN apk add --no-cache \
       libxslt-dev \
       libffi-dev \
       py3-pip \
-      python3-dev \
-      && python3 -m venv /opt/venv \
-      && /opt/netbox/venv/bin/python3 -m pip install --upgrade pip setuptools
+      python3-dev\
+      git
+#      && python3 -m venv /opt/netbox/venv \
+#      && /opt/netbox/venv/bin/python3 -m pip install --upgrade pip setuptools
 
 COPY ./plugin_requirements.txt /
-RUN /opt/netbox/venv/bin/pip install -r /plugin_requirements.txt
+RUN /opt/netbox/venv/bin/pip install --no-warn-script-location -r /plugin_requirements.txt
 
-FROM netboxcommunity/netbox:latest-ldap AS main
-
-RUN apk add --no-cache \
-      libxslt
-
-WORKDIR /opt
-
-COPY --from=builder /opt/netbox/venv /opt/netbox/venv
-
-COPY configuration/onboarding.py /opt/netbox/netbox/netbox/onboarding.py
+COPY configuration/onboarding.py /etc/netbox/config/onboarding.py
+RUN SECRET_KEY="dummy" /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input
 
 WORKDIR /opt/netbox/netbox
