@@ -18,6 +18,5 @@ RUN /opt/netbox/venv/bin/pip install --no-warn-script-location -r /plugin_requir
 
 COPY configuration/onboarding.py /etc/netbox/config/onboarding.py
 RUN SECRET_KEY="dummy" /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input
-RUN SECRET_KEY="dummy" /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py makemigrations --no-input
 
 WORKDIR /opt/netbox/netbox
