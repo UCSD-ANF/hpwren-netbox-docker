@@ -3,15 +3,17 @@ services:
   netbox:
     ports:
       - 8000:8080
-    build:
+    build: &build
       context: .
       dockerfile: Dockerfile-Plugins
-    image: &image netbox:${VERSION-v2.11.12}-plugins
+    image: &image netbox:${VERSION-v3.0.3}-plugins
     env_file: &env env/netbox-local.env
   netbox-worker:
+    build: *build
     image: *image
     env_file: *env
   netbox-housekeeping:
+    build: *build
     image: *image
     env_file: *env
   tls:

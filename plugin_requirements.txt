@@ -1,3 +1,4 @@
-ntc-netbox-plugin-onboarding
+#Disabled, kinda doesn't work.
+#ntc-netbox-plugin-onboarding
 git+git://github.com/barneysowood/napalm-edgeos@develop
 napalm-vyos

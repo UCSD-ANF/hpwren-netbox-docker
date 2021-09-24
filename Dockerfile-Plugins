@@ -1,4 +1,4 @@
-ARG VERSION=v2.11.12
+ARG VERSION=v3.0.3
 FROM netboxcommunity/netbox:${VERSION}-ldap
 ARG VERSION
 
@@ -16,7 +16,7 @@ RUN apk add --no-cache \
 COPY ./plugin_requirements.txt /
 RUN /opt/netbox/venv/bin/pip install --no-warn-script-location -r /plugin_requirements.txt
 
-COPY configuration/onboarding.py /etc/netbox/config/onboarding.py
+#COPY configuration/onboarding.py /etc/netbox/config/onboarding.py
 RUN SECRET_KEY="dummy" /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input
 
 WORKDIR /opt/netbox/netbox
