@@ -6,7 +6,7 @@ services:
     build: &build
       context: .
       dockerfile: Dockerfile-Plugins
-    image: &image netbox:${VERSION-v3.0.3}-plugins
+    image: &image netbox:${VERSION-v3.0.4}-plugins
     env_file: &env env/netbox-local.env
   netbox-worker:
     build: *build
