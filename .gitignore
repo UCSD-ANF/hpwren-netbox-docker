@@ -1,7 +1,7 @@
 *.sql.gz
 .netbox
 .initializers
-docker-compose.override.yml
+docker-compose.prod.yml
 *.pem
 configuration/*
 !configuration/configuration.py
@@ -13,3 +13,4 @@ configuration/ldap/*
 !configuration/plugins.py
 prometheus.yml
 super-linter.log
+env/*-prod.env
