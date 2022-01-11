@@ -9,12 +9,12 @@ Additional plugins in plugin_requirements.txt
 #HOW TO RUN
 
 ## Devel
-docker-compose pull
-docker-compose build
-docker-compose up -d
+docker compose pull
+docker compose build
+docker compose up -d
 
 ## Production
-docker-compose pull
-docker-compose build
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose pull
+docker compose build
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
