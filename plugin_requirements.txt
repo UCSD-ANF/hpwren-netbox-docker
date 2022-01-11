@@ -1,4 +1,4 @@
 #Disabled, kinda doesn't work.
 #ntc-netbox-plugin-onboarding
-git+git://github.com/barneysowood/napalm-edgeos@develop
+git+https://github.com/barneysowood/napalm-edgeos.git@develop
 napalm-vyos
