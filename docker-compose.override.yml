@@ -13,12 +13,12 @@ services:
   netbox-housekeeping:
     build: *build
     image: *image
-  tls:
-    image: zazukoians/hitch
-    environment:
-      HITCH_PEM: /app/cert_and_key.pem # path within the container to the TLS certificate
-      HITCH_PARAMS: --backend=[netbox]:8080 --frontend=[*]:443 # listen on *:443 and forward traffic to netbox
-    depends_on:
-      - netbox
-    ports:
-      - 443:443 # bind the container's port 443 to the host's port 8443
+    tls:
+        image: caddy:2-alpine
+        depends_on:
+            - netbox
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+        ports:
+            - 80:80 # Allows for http redirection
+            - 443:443

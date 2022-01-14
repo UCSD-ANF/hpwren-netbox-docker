@@ -1,0 +1,12 @@
+# ./Caddyfile for Netbox Docker
+# https://github.com/netbox-community/netbox-docker/wiki/TLS
+netbox.int.hpwren.ucsd.edu, 0.0.0.0, ::0, localhost {
+    reverse_proxy netbox:8080
+    encode gzip zstd
+
+    tls /etc/ssl/private/cert.crt /etc/ssl/private/key.key
+
+    log {
+        level error
+    }
+}
