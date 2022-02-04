@@ -1,4 +1,4 @@
-ARG VERSION=v3.1.7
+ARG VERSION=v3.1.6
 FROM netboxcommunity/netbox:${VERSION}-ldap
 ARG VERSION
 
