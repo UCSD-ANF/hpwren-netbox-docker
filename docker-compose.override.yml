@@ -13,12 +13,12 @@ services:
   netbox-housekeeping:
     build: *build
     image: *image
-    tls:
-        image: caddy:2-alpine
-        depends_on:
-            - netbox
-        volumes:
-            - ./Caddyfile:/etc/caddy/Caddyfile:ro
-        ports:
-            - 80:80 # Allows for http redirection
-            - 443:443
+  tls:
+    image: caddy:2-alpine
+    depends_on:
+      - netbox
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    ports:
+      - 80:80 # Allows for http redirection
+      - 443:443
