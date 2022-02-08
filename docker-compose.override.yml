@@ -1,3 +1,4 @@
+---
 version: '3.4'
 services:
   netbox:
@@ -7,9 +8,11 @@ services:
       context: .
       dockerfile: Dockerfile-Plugins
     image: &image netbox:${VERSION-v3.1.6}-plugins
+    restart: "unless-stopped"
   netbox-worker:
     build: *build
     image: *image
+    restart: "unless-stopped"
   netbox-housekeeping:
     build: *build
     image: *image
@@ -22,3 +25,12 @@ services:
     ports:
       - 80:80 # Allows for http redirection
       - 443:443
+    restart: "unless-stopped"
+  postgres:
+    restart: "unless-stopped"
+  redis:
+    restart: "unless-stopped"
+  redis-cache:
+    restart: "unless-stopped"
+...
+
