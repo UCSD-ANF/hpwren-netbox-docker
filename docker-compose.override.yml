@@ -7,7 +7,7 @@ services:
     build: &build
       context: .
       dockerfile: Dockerfile-Plugins
-    image: &image netbox:${VERSION-v3.1.6}-plugins
+    image: &image gitlab.hpwren.ucsd.edu:5005/systems/netbox-docker:${VERSION-v3.2.0}-plugins
     restart: "unless-stopped"
   netbox-worker:
     build: *build
